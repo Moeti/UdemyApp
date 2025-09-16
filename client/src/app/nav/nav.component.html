@@ -1,32 +1,41 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Udemy App</a>
-    @if(accountService.currentUser()){
+    <a class="navbar-brand" routerLinkActive="active" routerLink="/"
+      >Udemy App</a
+    >
+
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      @if(accountService.currentUser()){
       <li class="nav-item">
-        <a class="nav-link">Matches</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="/members"
+          >Matches</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link">Lists</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="lists"
+          >Lists</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link">Messages</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="messages"
+          >Messages</a
+        >
       </li>
+      }
     </ul>
-    } 
 
     @if (accountService.currentUser()) {
-      <div dropdown class="dropdown">
-        <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">Welcome user</a>
-        <div *bsDropdownMenu class="dropdown-menu">
-          <a class="dropdown-item">Edit Profile</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Logout</a>
-        </div>
+    <div dropdown class="dropdown">
+      <a dropdownToggle class="dropdown-toggle text-light text-decoration-none"
+        >Welcome user {{accountService.currentUser()?.username | titlecase}}</a
+      >
+      <div *bsDropdownMenu class="dropdown-menu">
+        <a class="dropdown-item">Edit Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>
-    }
-    
-    @if(!accountService.currentUser()){
+    </div>
+    } @if(!accountService.currentUser()){
     <form
       #loginForm="ngForm"
       (ngSubmit)="login()"
@@ -46,7 +55,7 @@
         type="password"
         placeholder="password"
       />
-      <button class="btn btn-outline-success" type="submit">Login</button>
+      <button class="btn btn-success" type="submit">Login</button>
     </form>
     }
   </div>
